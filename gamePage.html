@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Snack Pop </title>
+        <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+        <script src="./scripts/lib/jquery.ui.touch-punch.min.js"></script>
+        <script type="text/javascript" src="./scripts/snackPop.js"></script>
+        <link rel="stylesheet" type="text/css" href="./style/css/snackPop.css"></link>
+        <link href='http://fonts.googleapis.com/css?family=Bubblegum+Sans' rel='stylesheet' type='text/css'>
+    </head>
+    <body onload = "startTimer();">
+       
+        <div id="gameContainer" class="container">
+        <img id="paddle1" class="candy" src="style/images/paddle1.png" width="100px", height="200px">
+        <img id="paddle2" class="candy" src="style/images/paddle2.png" width="200px", height="200px">
+        <img id="paddle3" class="candy" src="style/images/paddle3.png" width="100px", height="200px">
+            <header>
+                <ul>
+                    <li class="gamePageHeader">
+                        <p>
+                            Score
+                        </p>
+                    <p id="gameScore">0</p>
+                    
+                </li>
+                <li class="gamePageHeader">
+                    <div class="paddlePopHeader">
+                        <img src="./style/images/paddlePop.png" class="paddlePopImage"></img>
+                    </div>
+                </li>
+                
+                <li class="gamePageHeader">
+                    <p>
+                        Time
+                    </p>
+                    <p  id="gameTimer">30</p>
+                </li>
+            </ul>
+        </header>
+
+        <div class="catcher">
+            <img id="mouthCatcher" width="250px" height="250px"></img>
+        </div>
+        
+    </div>
+    <div id ="gameOver" style="display:none;">
+        <div class="paddlePopHeader">
+            <img src="./style/images/paddlePop.png" class="paddlePopImage"></img>
+        </div>
+        <p class="mainText">
+            GAME OVER!!
+        </p>
+    </div>
+</body>
+</html>
