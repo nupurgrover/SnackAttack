@@ -149,12 +149,10 @@ function loadCatcher(){
 				if( paddleLeft > left && paddleLeft < right
 					&& paddleTop > top && paddleTop < bottom){
 					var score = document.getElementById("gameScore").innerHTML;
-					score = score + 10;
+					score = parseInt(score, 10) + 10;
 					document.getElementById("gameScore").innerHTML = score;
 				}
 			}
-			
-
 		}
 	});
 };
