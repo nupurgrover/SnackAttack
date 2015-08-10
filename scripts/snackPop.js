@@ -10,7 +10,6 @@ function goToChoosePicture(){
 	document.getElementById("firstPage").style.display = "none";
 	document.getElementById("secondPage").style.display = "block";
 	drawMouth();
-	init();
 };
 
 function drawMouth(){
@@ -52,7 +51,6 @@ function upload(event, imageId, pageId, buttonId){
 function gotToPageFive(){
 	document.getElementById("fourthPage").style.display = "none";
 	document.getElementById("fifthPage").style.display = "block";
-	init();
 }
 
 function goBackToChoosePicture(){
