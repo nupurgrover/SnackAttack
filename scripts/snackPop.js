@@ -1,5 +1,11 @@
 var originalWidth, originalHeight;
 
+/*function to initialize the client height*/
+function init() {
+	var height = window.innerHeight;
+	document.getElementById("outerContainer").style.height = height + "px";
+};
+
 function goToChoosePicture(){
 	document.getElementById("firstPage").style.display = "none";
 	document.getElementById("secondPage").style.display = "block";
@@ -134,6 +140,7 @@ function startGame(){
 
 
 function startTimer(){
+	init();
 	loadCatcher();
 	dropCandy();
 	var seconds = 30;
