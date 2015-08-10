@@ -1,6 +1,6 @@
 var originalWidth, originalHeight;
 
-
+/*function to initialize the client height*/
 function init() {
 	var height = window.innerHeight;
 	document.getElementById("outerContainer").style.height = height + "px";
@@ -12,6 +12,8 @@ function goToChoosePicture(){
 	drawMouth();
 };
 
+
+/*function to render the mouth shape on the HTML 5 canvas*/
 function drawMouth(){
 	var canvas = document.getElementById("mouthOutline");
     var ctx = canvas.getContext("2d");
@@ -25,6 +27,7 @@ function drawMouth(){
      ctx.stroke(path);
 };
 
+/*function to upload the image*/
 function upload(event, imageId, pageId, buttonId){
 	var showMouthClosed = document.getElementById(imageId);
 	var files = event.target.files;
@@ -58,21 +61,28 @@ function goBackToChoosePicture(){
 	document.getElementById("secondPage").style.display = "block";
 };
 
+function goBackToChoosePictureOne(){
+	document.getElementById("buttonCollectionOne").style.display = "none";
+	document.getElementById("thirdPage").style.display = "block";
+};
+
 function cropAndSave(){
 	document.getElementById("thirdPage").style.display = "block";
-	saveCroppedPicture("showMouthClosed", "mouthClosedOverlay", "mouthClosedContainer", "mouthClosed");
+	saveCroppedPicture("showMouthClosed", "mouthClosedOverlay", "mouthClosedContainer", "mouthClosed", "canvas");
 	document.getElementById("secondPage").style.display = "none";
 	document.getElementById("buttonCollection").style.display = "none";
 };
 
 function cropAndSaveSecond(){
 	document.getElementById("fourthPage").style.display = "block";
-	saveCroppedPicture("showMouthOpen", "mouthOpenOverlay", "mouthOpenContainer", "mouthOpen");
+	saveCroppedPicture("showMouthOpen", "mouthOpenOverlay", "mouthOpenContainer", "mouthOpen", "canvasOne");
 	document.getElementById("thirdPage").style.display = "none";
 	document.getElementById("buttonCollectionOne").style.display = "none";
 };
 
-function saveCroppedPicture(imageId, overlayId, containerId, storageId){
+//function to save the cropped picture into the local storage
+
+function saveCroppedPicture(imageId, overlayId, containerId, storageId, canvasId){
 	
 	var imgTarget = document.getElementById(imageId);
 	var img = $(imgTarget);
@@ -100,7 +110,7 @@ function saveCroppedPicture(imageId, overlayId, containerId, storageId){
     newCanvas.height = relativeHt; 
     newCanvas.getContext("2d").putImageData(imageData, 0, 0);
 
-	var cropCanvas = document.getElementById("canvas");
+	var cropCanvas = document.getElementById(canvasId);
 	cropCanvas.width = width;
 	cropCanvas.height = height;
 

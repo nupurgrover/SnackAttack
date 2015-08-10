@@ -21,9 +21,7 @@
           <img src="./style/images/paddlePop.png" class="paddlePopImage"></img>
         </div>
       </header>
-      <div class="snackAttackLogo">
-        
-      </div>
+     
       <div id="firstPage" class="newPage">
         <p class="mainText">
           Click a photo of your mouth to join the snack attack game now and win exciting prizes!
@@ -32,6 +30,7 @@
         START
         </button>
       </div>
+      
       <div id="secondPage" style="display:none;" class="newPage">
         <canvas id="mouthOutline" width="300" height="200">
         </canvas>
@@ -71,6 +70,7 @@
         <input type="file" accept="image/*" id="mouthOpen" capture="camera" class="takePicture" onchange="upload(event, 'showMouthOpen', 'thirdPage', 'buttonCollectionOne')" />
         </button>
       </div>
+
       <div style="display:none;" id="buttonCollectionOne">
         <div class="image-container" id="mouthOpenContainer">
           <img src="about:blank" alt="" id="showMouthOpen">
@@ -79,11 +79,13 @@
         <button class="startButton" onClick="cropAndSaveSecond();">
         CROP & SAVE!
         </button>
-        <button class="startButton" onClick="goBackToChoosePicture()">
+        <button class="startButton" onClick="goBackToChoosePictureOne()">
         TAKE ANOTHER
         </button>
       </div>
+
       <div id="fourthPage" style="display:none;" class="newPage">
+        <canvas id="canvasOne"></canvas>
         <p class="mainText">
           Perfect! Start Playing Now!
         </p>
