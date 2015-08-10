@@ -49,6 +49,16 @@ p.mainText{
     padding: 20px;
 }
 
+p.gameOver {
+    font-family: 'Bubblegum Sans', cursive;
+    text-align: center;
+    font-size: 5em;
+    margin: 1em;
+    color: #fff;
+    text-shadow: 11px 2px black, 10px 6px black, 13px 3px black, 0px 8px black;
+    padding: 20px;
+}
+
 button.startButton{
 	 width: 8em;
     text-align: center;
@@ -80,6 +90,8 @@ img.candy{
 div.catcher{
 	height:250px;
 	width:250px;
+    position: absolute;
+    left:25%;
 }
 
 input.takePicture{
@@ -113,4 +125,9 @@ input.takePicture{
     border: solid 2px rgba(222,60,80,.9);
     box-sizing: content-box;
     pointer-events: none;
+}
+
+div#mouthOpenOverlay {
+     width: 75%;
+    height: 75%;
 }

@@ -126,11 +126,13 @@ function saveCroppedPicture(imageId, overlayId, containerId, storageId){
 };
 
 function startGame(){
-	window.location.href = "gamePage.html"
+	window.location.href = "gamePage.html";
+
 };
 
 
 function startTimer(){
+	init();
 	loadCatcher();
 	dropCandy();
 	var seconds = 30;
@@ -139,8 +141,11 @@ function startTimer(){
 			seconds--;
 			document.getElementById("gameTimer").innerHTML = seconds;
 		} else if(seconds == 0){
-			document.getElementById("gameContainer").display = "none";
-			document.getElementById("gameOver").display = "block";
+			document.getElementById("gameContainer").style.display = "none";
+			document.getElementById("gameOver").style.display = "block";
+			var score = document.getElementById("gameScore").innerHTML;
+			document.getElementById("finalScore").innerHTML = score;
+
 		}
 	}, 1000);
 };
@@ -175,7 +180,7 @@ function loadCatcher(){
 	var catcher = document.getElementById("mouthCatcher");
 	var mouthClosedUrl = localStorage.getItem("mouthClosed");
 	var mouthOpenUrl = localStorage.getItem("mouthOpen");
-	catcher.src=mouthClosedUrl;
+	catcher.src=mouthOpenUrl;
 	$("#mouthCatcher").draggable({
 		stop: function(evt, ui){
 			var top = ui.offset.top;
