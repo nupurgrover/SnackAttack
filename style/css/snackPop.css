@@ -45,7 +45,6 @@ p.mainText{
     font-size: 2em;
     color: #fff;
     text-shadow: 5px 2px black, 5px 0px black, 5px 3px black, 0px 4px black;
-    padding: 20px;
 }
 
 p.gameOver {

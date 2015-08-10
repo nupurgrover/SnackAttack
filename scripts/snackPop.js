@@ -115,7 +115,7 @@ function saveCroppedPicture(imageId, overlayId, containerId, storageId, canvasId
 	cropCanvas.height = height;
 
 	var ctx = cropCanvas.getContext("2d");
-	ctx.scale(0.1, 0.1);                    
+	ctx.scale(0.5, 0.5);                    
     ctx.drawImage(newCanvas, 0, 0);
 
 
