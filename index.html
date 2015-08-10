@@ -1,88 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Snack Pop </title>
-        <script type="text/javascript" src="./scripts/snackPop.js"></script>
-        <link rel="stylesheet" type="text/css" href="./style/css/snackPop.css"></link>
-        <link href='http://fonts.googleapis.com/css?family=Bubblegum+Sans' rel='stylesheet' type='text/css'>
-    </head>
-    <body>
-        <div class="container">
-            
-            <header>
-                <div class="paddlePopHeader">
-                    <img src="./style/images/paddlePop.png" class="paddlePopImage"></img>
-                </div>
-            </header>
+  <head>
+    <meta charset="UTF-8">
+    <title>Snack Pop </title>
+    <meta name="viewport" content="width=device-width,
+    user-scalable=no, initial-scale=1, maximum-scale=1, user-scalable=0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <script type="text/javascript" src="./scripts/snackPop.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="./style/css/snackPop.css"></link>
+    <link href='http://fonts.googleapis.com/css?family=Bubblegum+Sans' rel='stylesheet' type='text/css'>
+  </head>
+  <body onload="init()">
+    <div class="container" id="outerContainer">
+      
+      <header>
+        <div class="paddlePopHeader">
+          <img src="./style/images/paddlePop.png" class="paddlePopImage"></img>
+        </div>
+      </header>
+      <div class="snackAttackLogo">
+        
+      </div>
+      <div id="firstPage" class="newPage">
+        <p class="mainText">
+          Click a photo of your mouth to join the snack attack game now and win exciting prizes!
+        </p>
+        <button class="startButton" onClick="goToChoosePicture()">
+        START
+        </button>
+      </div>
+      <div id="secondPage" style="display:none;" class="newPage">
+        <canvas id="mouthOutline" width="300" height="200">
+        </canvas>
+        <p class="mainText">
+          Take a picture of your mouth closed!
+        </p>
+        
+        <button class="startButton" id="takeFirstPicture">
+          <label for="mouthClosed">
+            CLICK!
+          </label>
+          <input type="file" accept="image/*" id="mouthClosed" capture="camera" class="takePicture" onchange="upload(event, 'showMouthClosed', 'secondPage', 'buttonCollection')" />
+        </button>
+        
+      </div>
 
-             <div class="snackAttackLogo">
-                   
-            </div>
+       <div style="display:none;" id="buttonCollection">
+        <div class="image-container" id="mouthClosedContainer">
+          <img src="about:blank" alt="" id="showMouthClosed">
+          <div class="overlay" id="mouthClosedOverlay"></div>
+        </div>
+          <button class="startButton" onClick="cropAndSave();">
+              CROP & SAVE!
+          </button>
+          <button class="startButton" onClick="goBackToChoosePicture()">
+              TAKE ANOTHER
+          </button>
+        </div>
 
 
-            <div id="firstPage" class="newPage">
-                <p class="mainText">
-                    Click a photo of your mouth to join the snack attack game now and win exciting prizes!
-                </p>
-                <button class="startButton" onClick="goToChoosePicture()">
-                START
-                </button>
-            </div>
+      <div id="thirdPage" style="display:none;" class="newPage">
+        <canvas id="canvas"></canvas>
+        <p class="mainText">
+          Great! Now take a picture of your mouth wide open!
+        </p>
+        <button class="startButton">
+        <label for="mouthOpen">
+          CLICK!
+        </label>
+        <input type="file" accept="image/*" id="mouthOpen" capture="camera" class="takePicture" onchange="upload(event, 'showMouthOpen', 'thirdPage', 'buttonCollectionOne')" />
+        </button>
+      </div>
+
+      <div style="display:none;" id="buttonCollectionOne">
+        <div class="image-container" id="mouthOpenContainer">
+          <img src="about:blank" alt="" id="showMouthOpen">
+          <div class="overlay" id="mouthOpenOverlay"></div>
+        </div>
+          <button class="startButton" onClick="cropAndSaveSecond();">
+              CROP & SAVE!
+          </button>
+          <button class="startButton" onClick="goBackToChoosePicture()">
+              TAKE ANOTHER
+          </button>
+        </div>
 
 
-            <div id="secondPage" style="display:none;" class="newPage">
-                <canvas id="mouthOutline" width="900" height="400">
-                </canvas>
-                  <p class="mainText">
-                    Take a picture of your mouth closed now!
-                </p>
-                    
-                    <button class="startButton">
-                        <label for="mouthClosed">
-                            CLICK!
-                          </label>
-                        <input type="file" accept="image/*" id="mouthClosed" capture="camera" class="takePicture" onchange="uploadFirst(event)" />
-                    </button>
-                   
-                </div>
-
-                <div id="thirdPage" style="display:none;" class="newPage">
-                     <div>
-                        <img src="about:blank" alt="" style="width:200px;" id="showMouthClosed">
-                    </div>
-                      <p class="mainText">
-                          Great! Now take a picture of your mouth wide open!
-                      </p>
-                       <button class="startButton">
-                        <label for="mouthOpen">
-                            CLICK!
-                        </label>
-                        <input type="file" accept="image/*" id="mouthOpen" capture="camera" class="takePicture" onchange="uploadSecond(event)" />
-                    </button>
-                </div>
-
-                 <div id="fourthPage" style="display:none;" class="newPage">
-                    <div>
-                        <img src="about:blank" alt="" style="width:200px;" id="showMouthOpen">
-                    </div>
-                     <p class="mainText">
-                          Perfect! Start Playing Now!
-                      </p>
-                       <button class="startButton" onClick="gotToPageFive();">
-                       GO!
-                    </button>
-                </div>
-
-                <div id="fifthPage" style="display:none;" class="newPage">
-                     <p class="mainText">
-                          Tilt your phone around to catch Paddle Pop with your mouth! Different ones give you a different score! Have fun!
-                      </p>
-                       <button class="startButton" onClick="startGame();">
-                        START >
-                    </button>
-                </div>
-
-            </div>
-        </body>
-    </html>
+      <div id="fourthPage" style="display:none;" class="newPage">
+        <p class="mainText">
+          Perfect! Start Playing Now!
+        </p>
+        <button class="startButton" onClick="gotToPageFive();">
+        GO!
+        </button>
+      </div>
+      <div id="fifthPage" style="display:none;" class="newPage">
+        <p class="mainText">
+          Tilt your phone around to catch Paddle Pop with your mouth! Different ones give you a different score! Have fun!
+        </p>
+        <button class="startButton" onClick="startGame();">
+        START >
+        </button>
+      </div>
+    </div>
+  </body>
+</html>
