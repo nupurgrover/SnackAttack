@@ -2,7 +2,7 @@ body{
 
     margin:0;
     padding:0;
-    background:#000;
+    background:#fff;
 }
 
 div.container{
@@ -27,16 +27,13 @@ li.gamePageHeader{
 	display: inline-block;
 }
 
-li.gamePageHeader p{
-	font-family: 'Bubblegum Sans', cursive;
-    font-size: 6em;
-    color: #fff;
-    text-shadow: -8px 15px black, 0 10px black, 8px 0 black, 0 -10px black;
-}
-
 li.gamePageHeader:nth-child(3) {
 	float:right;
-	margin-right: 3em;
+	margin-right: 1em;
+}
+
+li.gamePageHeader div.paddlePopHeader{
+    width:6em;
 }
 
 p.mainText{
@@ -45,16 +42,6 @@ p.mainText{
     font-size: 2em;
     color: #fff;
     text-shadow: 5px 2px black, 5px 0px black, 5px 3px black, 0px 4px black;
-}
-
-p.gameOver {
-    font-family: 'Bubblegum Sans', cursive;
-    text-align: center;
-    font-size: 5em;
-    margin: 1em;
-    color: #fff;
-    text-shadow: 11px 2px black, 10px 6px black, 13px 3px black, 0px 8px black;
-    padding: 20px;
 }
 
 button.startButton{
@@ -87,8 +74,6 @@ img.candy{
 div.catcher{
 	height:250px;
 	width:250px;
-    position: absolute;
-    left:25%;
 }
 
 input.takePicture{
@@ -128,3 +113,11 @@ div#mouthOpenOverlay {
      width: 75%;
     height: 75%;
 }
+
+img#mouthCatcher{
+    position:absolute;
+    left:50%;
+    top:50%;
+
+}
+
