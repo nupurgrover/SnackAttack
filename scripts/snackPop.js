@@ -216,6 +216,8 @@ function dropCandy() {
     }, 4000);
 };
 
+
+/*function to load the catcher image on the game screen*/
 function loadCatcher() {
     var catcher = document.getElementById("mouthCatcher");
     var mouthClosedUrl = localStorage.getItem("mouthClosed");
@@ -245,6 +247,8 @@ function loadCatcher() {
         }
     });
 
+    /*Implementation of accelerator*/
+
     if (window.DeviceMotionEvent) {
         window.ondevicemotion = function(event) {
             ax = event.accelerationIncludingGravity.x * 5;
@@ -270,8 +274,6 @@ function loadCatcher() {
     }
 
 };
-
-
 
 
 function checkForBounds() {
