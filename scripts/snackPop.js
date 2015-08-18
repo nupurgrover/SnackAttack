@@ -15,13 +15,13 @@ function init() {
 function goToChoosePicture() {
     document.getElementById("firstPage").style.display = "none";
     document.getElementById("secondPage").style.display = "block";
-    drawMouth();
+    drawMouth("mouthOutline");
 };
 
 
 /*function to render the mouth shape on the HTML 5 canvas*/
-function drawMouth() {
-    var canvas = document.getElementById("mouthOutline");
+function drawMouth(canvasId) {
+    var canvas = document.getElementById(canvasId);
     var ctx = canvas.getContext("2d");
 
     var path = new Path2D();
@@ -53,27 +53,17 @@ function upload(event, imageId, pageId, buttonId) {
             }
             document.getElementById(pageId).style.display = "none";
             document.getElementById(buttonId).style.display = "block";
-            $("#mouthClosedOverlay").draggable({
-                stop: function(evt, ui) {
-                    var top = ui.offset.top;
-                    var bottom = top + 200;
-                    var left = ui.offset.left;
-                    var right = left + 200;
-                    for (var i = 1; i <= 3; i++) {
-                        var paddleLeft = parseInt($("#paddle" + i).css("left").substring(0, 3), 10);
-                        var paddleTop = parseInt($("#paddle" + i).css("top").substring(0, 3), 10);
-                        if (paddleLeft > left && paddleLeft < right && paddleTop > top && paddleTop < bottom) {
-                            var score = document.getElementById("gameScore").innerHTML;
-                            score = parseInt(score, 10) + 10;
-                            document.getElementById("gameScore").innerHTML = score;
-                            catcher.src = mouthOpenUrl;
-                            setTimeout(function() {
-                                catcher.src = mouthClosedUrl;
-                            }, 400);
-                        }
-                    }
-                }
-            });
+            if(imageId == "showMouthClosed"){
+            	drawMouth("mouthClosedOverlay");
+            }
+            else{
+            	var canvas = document.getElementById("mouthOpenOverlay");
+    			var ctx = canvas.getContext("2d");
+    			ctx.beginPath();
+    			ctx.arc(150,100,100,0,2*Math.PI, false);
+    			ctx.lineWidth = 4;
+    			ctx.stroke();
+            }
         };
     }
 };
@@ -95,14 +85,14 @@ function goBackToChoosePictureOne() {
 
 function cropAndSave() {
     document.getElementById("thirdPage").style.display = "block";
-    saveCroppedPicture("showMouthClosed", "mouthClosedOverlay", "mouthClosedContainer", "mouthClosed", "canvas");
+    saveMouthClosed("showMouthClosed", "mouthClosed", "canvas");
     document.getElementById("secondPage").style.display = "none";
     document.getElementById("buttonCollection").style.display = "none";
 };
 
 function cropAndSaveSecond() {
     document.getElementById("fourthPage").style.display = "block";
-    saveCroppedPicture("showMouthOpen", "mouthOpenOverlay", "mouthOpenContainer", "mouthOpen", "canvasOne");
+    saveMouthOpen("showMouthOpen", "mouthOpen", "canvasOne");
     document.getElementById("thirdPage").style.display = "none";
     document.getElementById("buttonCollectionOne").style.display = "none";
 };
@@ -159,6 +149,73 @@ function saveCroppedPicture(imageId, overlayId, containerId, storageId, canvasId
     }
 };
 
+function saveMouthClosed(imageId, storageId, canvasId){
+	var cropCanvas = document.getElementById(canvasId);
+    cropCanvas.width = 300;
+    cropCanvas.height = 200;
+    var img = document.createElement('IMG');
+    img.src = document.getElementById(imageId).src;
+    img.onload = function(){
+    	var ctx = cropCanvas.getContext("2d");
+    	ctx.beginPath();
+	    //var path = new Path2D();
+	    ctx.moveTo(10, 50);
+	    ctx.quadraticCurveTo(100, 10, 150, 40);
+	    ctx.quadraticCurveTo(200, 10, 290, 50);
+	    ctx.quadraticCurveTo(150, 210, 10, 50);
+	    ctx.closePath();
+	 
+	    // Clip to the current path
+	    ctx.clip();
+	 
+	    ctx.drawImage(img, 0, 0);
+
+	     var fileAsDataUrl = cropCanvas.toDataURL("image/jpg");
+
+	    try {
+	        if (fileAsDataUrl != "") {
+	            localStorage.setItem(storageId, fileAsDataUrl);
+	        } else {
+	            console.log("Conversion failed");
+	        }
+	    } catch (e) {
+	        console.log("Storage failed: " + e);
+	    }
+    };    
+}
+
+function saveMouthOpen(imageId, storageId, canvasId){
+	var cropCanvas = document.getElementById(canvasId);
+    cropCanvas.width = 400;
+    cropCanvas.height = 300;
+    var img = document.createElement('IMG');
+    img.src = document.getElementById(imageId).src;
+    img.onload = function(){
+    	var ctx = cropCanvas.getContext("2d");
+    	ctx.beginPath();
+	   ctx.beginPath();
+    	ctx.arc(150,100,100,0,2*Math.PI, false);
+    	ctx.stroke();
+	 
+	    // Clip to the current path
+	    ctx.clip();
+	 
+	    ctx.drawImage(img, 0, 0);
+
+	     var fileAsDataUrl = cropCanvas.toDataURL("image/jpg");
+
+	    try {
+	        if (fileAsDataUrl != "") {
+	            localStorage.setItem(storageId, fileAsDataUrl);
+	        } else {
+	            console.log("Conversion failed");
+	        }
+	    } catch (e) {
+	        console.log("Storage failed: " + e);
+	    }
+    };    
+};
+
 function startGame() {
     window.location.href = "gamePage.html";
 
@@ -179,7 +236,6 @@ function startTimer() {
             document.getElementById("gameOver").style.display = "block";
             var score = document.getElementById("gameScore").innerHTML;
             document.getElementById("finalScore").innerHTML = score;
-
         }
     }, 1000);
 };
@@ -234,13 +290,13 @@ function loadCatcher() {
                 var paddleLeft = parseInt($("#paddle" + i).css("left").substring(0, 3), 10);
                 var paddleTop = parseInt($("#paddle" + i).css("top").substring(0, 3), 10);
                 if (paddleLeft > left && paddleLeft < right && paddleTop > top && paddleTop < bottom) {
-                	$("#paddle" + i).css("top") = "0px;"
+                	catcher.src=mouthClosedUrl;
+                	$("#paddle" + i).css("top", "-100px");
                     var score = document.getElementById("gameScore").innerHTML;
                     score = parseInt(score, 10) + 10;
                     document.getElementById("gameScore").innerHTML = score;
-                    catcher.src=mouthOpenUrl;
 					setTimeout(function(){
-						catcher.src=mouthClosedUrl;
+						catcher.src=mouthOpenUrl;
 					},400);
                 }
             }
@@ -255,7 +311,7 @@ function loadCatcher() {
             ay = event.accelerationIncludingGravity.y * 5;
         }
 
-        setInterval(function() {
+       /* setInterval(function() {
             vx = vx + ax;
             vy = vy - ay;
 
@@ -270,7 +326,7 @@ function loadCatcher() {
             document.getElementById("mouthCatcher").style.top = y + "px";
             document.getElementById("mouthCatcher").style.left = x + "px";
 
-        }, 25);
+        }, 25); */
     }
 
 };

@@ -49,7 +49,8 @@
       <div style="display:none;" id="buttonCollection">
         <div class="image-container" id="mouthClosedContainer">
           <img src="about:blank" alt="" id="showMouthClosed">
-          <div class="overlay" id="mouthClosedOverlay"></div>
+          
+          <canvas id="mouthClosedOverlay" class="canvasOverlay" width="300" height="200"></canvas>
         </div>
         <button class="startButton" onClick="cropAndSave();">
         CROP & SAVE!
@@ -74,7 +75,7 @@
       <div style="display:none;" id="buttonCollectionOne">
         <div class="image-container" id="mouthOpenContainer">
           <img src="about:blank" alt="" id="showMouthOpen">
-          <div class="overlay" id="mouthOpenOverlay"></div>
+          <canvas id="mouthOpenOverlay" class="canvasOverlay" width="400" height="300"></canvas>
         </div>
         <button class="startButton" onClick="cropAndSaveSecond();">
         CROP & SAVE!

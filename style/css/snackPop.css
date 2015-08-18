@@ -121,3 +121,9 @@ img#mouthCatcher{
 
 }
 
+.canvasOverlay {
+    position: absolute;
+    left: 0;
+    top: 30%;
+}
+
